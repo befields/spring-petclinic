@@ -12,33 +12,33 @@ Make sure you are in the Developer perspective:
 
 ![Dev Perspective](images/3-switch-perspective.png)  
 
-Create a new MySQL instance by clicking the `+Add` button and choosing the `Database` option:
+The first step is create a database to hold our data. We'll use a MySQL Image to do this.
 
-![Add DB](images/4-db.png)
+Click the `+Add` button and choose the `Container images` option:  
 
-This will display the Developer Catalog. Choose MySQL Ephemeral:
+![Container images option](images/container_images_option.png)
 
-![MySQL Ephemeral](images/5-mysql-ephemeral.png)  
-
-and Click `Instantiate Template`.
-
-Then fill the wizard with the following parameters. Note that your Namespace will not match the one shown here, and that *does not* matter. To summarize this screen capture, here is a list of the values you need to change or supply:
-
-* MySQL Connection Username: **petclinic**
-* MySQL Connection Password: **petclinic**
-* MySQL root user Password: **petclinic**
-* MySQL Database Name: **petclinic**
+Enter the MySQL image we need, `docker.io/mysql:5.7.41`  
 
 
-![MySQL Template](images/6-db-params.png)
+![MySQL image entry](images/deploy_image_mysql.png)  
+
+Scroll to the bottom of the page and select the option to access advanced options for a Deployment:
+
+![deployment options](images/advanced%20options%20deployment.png)
+
+Using the Environment variables section, specify the database and authentication values by adding the following four environment variables.  
+
+![Environment variables](images/deploy_environment_variables.png)
+
+When they are entered, click the "Resource type" link. Select "Deployment" as the Resource type:  
+
+
+![MySQL Ephemeral](images/deploy_resource_type.png)  
 
 Click the `Create` button. 
 
-We are using the **Ephemeral** implementation because this a short-lived demo and we do not need to retain the data. In an Ephemeral instance, the data lives inside the pod, meaning the data is destroyed when the pod is destroyed.  
-
-In a production system, you will most likely be using a permanent MySQL instance. This stores the data in a Persistent Volume (basically a virtual hard drive), meaning the MySQL pod can be destroyed and replaced with the data remaining intact.
-
-After a few minutes, and behind the scenes, an Ephemeral instance of a MySQL database container will be started. At this point, you have a database engine to be used by the application. Time to move on and create the application.
+After a few minutes, and behind the scenes, a MySQL database container will be started. At this point, you have a database engine to be used by the application. Time to move on and create the application.
 
 ### Deploy Pet Clinic App
 
@@ -62,9 +62,17 @@ Next, choose the Builder Image option and make sure the Java builder is selected
 
 ![Choose builder image](images/select_builder_image.png)
 
+Scroll down to the Advanced options section and select the option to change the Resource type:
+
+![Select Resource type](images/advanced_options.png)  
+
+Choose the Deployment option:  
+
+![Deployment resource type](images/resource_type_deployment.png)  
+
 Near the bottom of the page, click the `Build Configuration` link:
 
-![Build Configuration](images/advanced_options.png)
+![Build Configuration](images/advanced_options_build_configuration.png)
 
 Add the following environment variables, as displayed in the following screen capture:
 
